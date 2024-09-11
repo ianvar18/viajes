@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="box">
+    <ion-list>
+      <ion-item>
+        <ion-input [(ngModel)]="usuario" label="Usuario:"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" [(ngModel)]="contrasena" label="Contraseña:"></ion-input>
+      </ion-item>
+
+    </ion-list>
+    <!-- 'inicio/:numero', -->
+    <ion-button (click)="registro()">Registrar</ion-button>
+    <!-- <ion-button [routerLink]="['/inicio/' + 100]">Acceder</ion-button> -->
+    <ion-button (click)="irlogin()">Ir al Login</ion-button>
+  </div>
+
+
+</ion-content>

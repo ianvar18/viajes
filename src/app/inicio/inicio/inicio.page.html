@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarsesion()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="box">
+    <ion-list>
+      <ion-item>
+        <ion-button expand="full" (click)="irvehiculos()">Lista de Vehículos</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button expand="full" (click)="irviajes()">Lista de Viajes</ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
