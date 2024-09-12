@@ -24,4 +24,9 @@ export class InicioPage implements OnInit {
   cerrarsesion() {
     this.router.navigateByUrl("/login");
   }
+
+  irPerfilUsuario() {
+    this.router.navigate(['/perfilusuario']);
+  }
 }
+

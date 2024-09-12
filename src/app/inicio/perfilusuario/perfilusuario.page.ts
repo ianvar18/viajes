@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfilusuario',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilusuarioPage implements OnInit {
 
-  constructor() { }
+  nombre: string[] = ['Nombre: Rogelio Lopez'];
+  correo: string[] = ['Correo: rogeliolopez@gmail.com'];
+  telefono: string[] = ['Telefono: +569 34567843']
+  miclasificacion: string[] = ['Mi Calificacion: 10/10 insano']
+
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
 
+  irlogin(){
+    this.router.navigateByUrl("/inicio");
+  }
 }
+
+

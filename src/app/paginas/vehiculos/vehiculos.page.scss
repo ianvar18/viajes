@@ -3,3 +3,32 @@ ion-button{
     margin-right: 20px;
     margin-left: 20px;
 }
+
+
+ion-content {
+    --background: url('/assets/img/muchosautos.jpg') no-repeat center center / cover;
+  }
+  
+
+
+
+ion-list {
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro con transparencia */
+    padding: 10px;
+    border-radius: 10px; /* Bordes redondeados para darle un mejor estilo */
+  } 
+ 
+  ion-item {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco con transparencia */
+    margin-bottom: 10px; /* Separación entre cada elemento */
+    color: white; /* Texto en blanco para contraste */
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+  } 
+
+  ion-button{
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    --background: rgba(15, 14, 14, 0.635); /* Fondo del botón (naranja en este ejemplo) */
+    --color: rgb(149, 146, 146); /* Color del texto */
+}

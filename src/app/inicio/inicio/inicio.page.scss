@@ -1,4 +1,56 @@
-ion-button{
-    font-size: 1.5rem;
-    height: 60px;
+
+
+
+ion-content {
+    --background: url('/assets/img/autochido.jpg') no-repeat center center / cover;
+  }
+  
+
+.box{
+    padding: 20px;
+    background-color: transparent !important;
+    padding-top: 250px; /* Ajusta este valor según lo que necesites para mover los botones hacia abajo */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Asegura que el contenido comience desde la parte superior */
+    align-items: center;
 }
+
+ion-toolbar{
+
+    --border-color: transparent;
+}
+
+
+
+
+
+  .boton {
+    --background: rgba(15, 14, 14, 0.635); /* Fondo del botón (naranja en este ejemplo) */
+    --color: rgb(149, 146, 146); /* Color del texto */
+    --border-radius: 50%; /* Bordes redondeados */
+    --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    width: 180px;
+    height: 180px;
+  }
+  
+  .boton:hover {
+    --background: #5c5c5c86; /* Color más oscuro al hacer hover */
+  }
+  
+.boton2{
+    --background: rgba(15, 14, 14, 0.635); /* Fondo del botón (naranja en este ejemplo) */
+    --color: rgb(149, 146, 146); /* Color del texto */
+    --border-radius: 15px; /* Bordes redondeados */
+    --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 1.2rem;
+  }
+  
+  .boton2:hover {
+    --background:  #5c5c5c86; /* Color más oscuro al hacer hover */
+  }

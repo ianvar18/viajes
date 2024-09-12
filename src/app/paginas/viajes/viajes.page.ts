@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-viajes',
   templateUrl: './viajes.page.html',
   styleUrls: ['./viajes.page.scss'],
 })
-export class ViajesPage implements OnInit {
+export class ViajesPage {
+  viajes: string[] = ['Rancagua', 'Ocean Drive']; 
+  nuevoViaje: string = ''; 
 
-  constructor() { }
+  constructor(private router:Router) {}
 
-  ngOnInit() {
+  // Método para agregar un nuevo viaje
+  agregarViaje() {
+    if (this.nuevoViaje.trim().length > 0) {
+      this.viajes.push(this.nuevoViaje); 
+      this.nuevoViaje = ''; 
+    }
   }
 
+  irlogin(){
+    this.router.navigateByUrl("/inicio");
+  }
 }
+
+
