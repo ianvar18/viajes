@@ -9,12 +9,17 @@
   <div class="box">
     <ion-list>
       <ion-item>
+        <ion-input [(ngModel)]="nombre" label="Nombre:"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="email" type="email" label="Correo electrónico:"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-input [(ngModel)]="usuario" label="Usuario:"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input type="password" [(ngModel)]="contrasena" label="Contraseña:"></ion-input>
       </ion-item>
-
     </ion-list>
     <!-- 'inicio/:numero', -->
     <ion-button (click)="registro()">Registrar</ion-button>

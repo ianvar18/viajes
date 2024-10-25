@@ -1,47 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-restcontrasena',
   templateUrl: './restcontrasena.page.html',
   styleUrls: ['./restcontrasena.page.scss'],
 })
-export class RestcontrasenaPage implements OnInit {
+export class RestcontrasenaPage {
+  email: string = '';
 
-  usuario:string = "";
-  contrasena:string = "";
-  confirmacioncontrasena:string = "";
+  constructor(
+    private navCtrl: NavController,
+    private afAuth: AngularFireAuth,
+    private alertController: AlertController
+  ) {}
 
-  constructor(private router:Router) { }
-
-
-  ngOnInit() {
-  }
-
-
-  restaurar(){
-  
-    if (this.usuario == "") {
-      alert("Ingrese un usuario");
+  async restaurar() {
+    if (!this.email) {
+      this.mostrarAlerta('Error', 'Por favor, ingrese su correo electrónico.');
       return;
     }
-    if (this.contrasena == "") {
-      alert("Ingrese una contraseña");
-      return;
+
+    try {
+      await this.afAuth.sendPasswordResetEmail(this.email);
+      this.mostrarAlerta('Éxito', 'Se ha enviado un correo electrónico para restablecer su contraseña.');
+      this.irlogin();
+    } catch (error) {
+      this.mostrarAlerta('Error', 'No se pudo enviar el correo electrónico de restablecimiento. Verifique su dirección de correo.');
     }
-    if (this.contrasena != this.confirmacioncontrasena) {
-      alert("Error en la confirmación")
-      return;
-    }
-    else{
-      alert("Ha cambiado su contraseña");
-      this.router.navigateByUrl("/login");
-    }
-    
   }
 
-  irlogin(){
-    this.router.navigateByUrl("/login");
+  irlogin() {
+    this.navCtrl.navigateBack('/login');
   }
 
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 }

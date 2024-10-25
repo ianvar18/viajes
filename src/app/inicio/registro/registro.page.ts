@@ -1,42 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-export class RegistroPage implements OnInit {
+export class RegistroPage {
+  nombre: string = '';
+  email: string = '';
+  usuario: string = '';
+  contrasena: string = '';
 
-  usuario:string = "";
-  contrasena:string = "";
+  constructor(
+    private navCtrl: NavController,
+    private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore
+  ) {}
 
-  constructor(private router:Router) { }
-
-
-  ngOnInit() {
+  async registro() {
+    try {
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(this.email, this.contrasena);
+      if (userCredential.user) {
+        await this.firestore.collection('usuarios').doc(userCredential.user.uid).set({
+          nombre: this.nombre,
+          email: this.email,
+          usuario: this.usuario
+        });
+        console.log('Usuario registrado con éxito');
+        this.navCtrl.navigateForward('/inicio');
+      }
+    } catch (error) {
+      console.error('Error al registrar usuario:', error);
+    }
   }
 
-
-  registro(){
-  
-    if (this.usuario == "") {
-      alert("Ingrese un usuario");
-      return;
-    }
-    if (this.contrasena == "") {
-      alert("Ingrese una contraseña");
-      return;
-    }
-    else{
-      alert("Registro exitoso");
-      this.router.navigateByUrl("/login");
-    }
-    
+  irlogin() {
+    this.navCtrl.navigateBack('/login');
   }
-
-  irlogin(){
-    this.router.navigateByUrl("/login");
-  }
-
 }

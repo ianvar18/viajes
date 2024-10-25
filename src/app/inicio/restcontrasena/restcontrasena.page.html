@@ -5,24 +5,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <div class="box">
     <ion-list>
       <ion-item>
-        <ion-input [(ngModel)]="usuario" label="Usuario:"></ion-input>
+        <ion-input [(ngModel)]="email" label="Correo electrónico:" type="email"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-input type="password" [(ngModel)]="contrasena" label="Contraseña:"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input type="password" [(ngModel)]="confirmacioncontrasena" label="Confirmación Contraseña:"></ion-input>
-      </ion-item>
-
     </ion-list>
     <ion-button (click)="restaurar()">Restaurar Contraseña</ion-button>
     <ion-button (click)="irlogin()">Volver al Login</ion-button>
-    
   </div>
-
-
 </ion-content>
