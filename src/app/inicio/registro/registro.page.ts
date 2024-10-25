@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -9,35 +9,40 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage {
-  nombre: string = '';
-  email: string = '';
   usuario: string = '';
   contrasena: string = '';
 
   constructor(
     private navCtrl: NavController,
     private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore
+    private alertController: AlertController
   ) {}
 
   async registro() {
     try {
-      const userCredential = await this.afAuth.createUserWithEmailAndPassword(this.email, this.contrasena);
-      if (userCredential.user) {
-        await this.firestore.collection('usuarios').doc(userCredential.user.uid).set({
-          nombre: this.nombre,
-          email: this.email,
-          usuario: this.usuario
-        });
-        console.log('Usuario registrado con éxito');
-        this.navCtrl.navigateForward('/inicio');
-      }
+      const result = await this.afAuth.createUserWithEmailAndPassword(
+        this.usuario,
+        this.contrasena
+      );
+      console.log('Usuario registrado:', result.user);
+      this.mostrarAlerta('Éxito', 'Usuario registrado correctamente');
+      this.navCtrl.navigateForward('/login');
     } catch (error) {
-      console.error('Error al registrar usuario:', error);
+      console.error('Error al registrar:', error);
+      this.mostrarAlerta('Error', 'No se pudo registrar el usuario');
     }
   }
 
   irlogin() {
-    this.navCtrl.navigateBack('/login');
+    this.navCtrl.navigateForward('/login');
+  }
+
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }
