@@ -34,6 +34,9 @@ export class LoginPage implements OnInit {
 
     try {
       const resultado = await this.afAuth.signInWithEmailAndPassword(this.usuario, this.contrasena);
+      const token = await resultado.user?.getIdToken();
+
+      
       if (resultado.user) {
         this.router.navigateByUrl("/inicio");
       }

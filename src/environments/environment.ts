@@ -10,12 +10,15 @@ export const firebaseConfig = {
   appId: "1:486413180619:web:b9bbbf218d1405b0c5054e"
 };
 
+
+
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 
 export const environment = {
   production: false,
-  firebaseConfig
+  firebaseConfig,
+  apiUrl:"https://uber-nodejs-server-git-d61f89-guillermovillacuratorres-projects.vercel.app/api/"
 };
 
 
