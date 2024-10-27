@@ -3,12 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'registro',
-    loadChildren: () => import('./inicio/registro/registro.module').then( m => m.RegistroPageModule)
-  },
-  {
     path: '',
-    redirectTo: 'registro',
+    redirectTo: 'login',  // Redirige a la página de login por defecto
     pathMatch: 'full'
   },
   {
@@ -38,11 +34,15 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./inicio/inicio/inicio.module').then( m => m.InicioPageModule)
-  },  {
+  },
+  {
     path: 'error404',
     loadChildren: () => import('./error404/error404.module').then( m => m.Error404PageModule)
   },
-
+  {
+    path: '**', 
+    redirectTo: 'error404'  // Ruta comodín para manejar páginas no encontradas
+  }
 ];
 
 @NgModule({

@@ -16,10 +16,11 @@ export class ViajeService {
       const params = {
         token: parToken
       };
-      const response = await lastValueFrom(this.http.get<any>(`${environment.apiUrl}viaje/obtener`, { params }));
+      const response = await lastValueFrom(this.http.get<any>(`${environment.apiUrl}/viaje/obtener`, { params }));
       return response;
     } catch (error) {
-      throw error;
+      console.error('Error al obtener los viajes:', error);
+      throw error; // Asegúrate de manejar el error en el componente que consume este servicio
     }
   }
 
@@ -31,9 +32,10 @@ export class ViajeService {
         estado: estado,
         token: token
       };
-      const response = await lastValueFrom(this.http.post<any>(`${environment.apiUrl}viaje/actualizar`, body));
+      const response = await lastValueFrom(this.http.post<any>(`${environment.apiUrl}/viaje/actualizar`, body));
       return response;
     } catch (error) {
+      console.error('Error al actualizar el estado del viaje:', error);
       throw error;
     }
   }

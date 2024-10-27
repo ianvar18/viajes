@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
 
   <div class="box">
-    <form (ngSubmit)="loginConFirebase()">
+    <form (ngSubmit)="login()">
       <ion-list>
         <ion-item>
           <ion-input [(ngModel)]="usuario" name="usuario" type="email" label="Correo electrónico:" required></ion-input>
@@ -19,6 +19,7 @@
       <ion-button type="submit" expand="block">Acceder</ion-button>
     </form>
     <ion-button (click)="recuperarContrasena()" expand="block">Recuperar contraseña</ion-button>
+    <ion-button (click)="registro()" expand="block" color="light">Registrarse</ion-button>
   </div>
 
 </ion-content>

@@ -4,22 +4,46 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let viaje of viajes">
-      {{ viaje }}
+<ion-content [fullscreen]="true">
+
+  <ion-list *ngIf="!loaded">
+    <ion-list-header>
+      <h3>
+        <ion-skeleton-text [animated]="true" style="width: 150px; height: 30px;"></ion-skeleton-text>
+      </h3>
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
     </ion-item>
   </ion-list>
 
-  <ion-item>
-    <ion-label position="floating">Nuevo Viaje</ion-label>
-    <ion-input [(ngModel)]="nuevoViaje"></ion-input>
-  </ion-item>
+  <ion-card *ngFor="let i of viajes" (click)="seleccionarViaje(i.id_usuario)">
+    <div class="box">
+      <ion-img [src]="i.imagen_vehiculo"></ion-img>
+    </div>
+    <h3>Origen: {{i.ubicacion_origen}}</h3>
+    <h3>Destino: {{i.ubicacion_destino}}</h3>
 
-  <ion-button expand="full" (click)="agregarViaje()">
-    Agregar Viaje
-  </ion-button>
-  <ion-button expand="full" (click)="irlogin()">
-    Volver al Inicio
-  </ion-button>
+    <div class="vertical">
+      <ion-label>Patente: {{i.patente}}</ion-label>
+      <ion-label>Color: {{i.color}}</ion-label>
+      <ion-label>Marca: {{i.marca}}</ion-label> 
+      <ion-label>Modelo: {{i.modelo}}</ion-label>
+    </div>
+  </ion-card>
+
 </ion-content>
