@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { map, take } from 'rxjs/operators';
+import { StorageService } from '../services/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
-  canActivate() {
-    return this.afAuth.authState.pipe(
-      take(1),
-      map(user => {
-        if (user) {
-          return true;
-        } else {
-          this.router.navigate(['/login']);
-          return false;
-        }
-      })
-    );
+  constructor(private router: Router, private storage: StorageService) {}
+
+  async canActivate(): Promise<boolean> {
+    // Obtenemos los datos almacenados para verificar el token
+    const token = await this.storage.obtenerStorage();
+    
+    if (token && token.length > 0 && token[0].token) {
+      // Si el token existe, permitimos el acceso a la ruta
+      return true;
+    } else {
+      // Si no hay token, redirigimos al login
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
 }

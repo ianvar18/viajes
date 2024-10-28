@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
+const RedireccionarLogin = () => redirectUnauthorizedTo(['/login']);
+
+
 const routes: Routes = [
   {
     path: '',
@@ -32,8 +36,10 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/viajes/viajes.module').then( m => m.ViajesPageModule)
   },
   {
-    path: 'inicio',
-    loadChildren: () => import('./inicio/inicio/inicio.module').then( m => m.InicioPageModule)
+    path: 'inicio', 
+    canActivate: [AngularFireAuthGuard], 
+    data: { authGuardPipe: RedireccionarLogin },       
+    loadChildren: () => import('./inicio/inicio/inicio.module').then(m => m.InicioPageModule)
   },
   {
     path: 'error404',
