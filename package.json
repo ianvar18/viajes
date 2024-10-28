@@ -34,6 +34,7 @@
     "@ionic/angular": "^8.3.3",
     "angular": "^1.8.3",
     "cors": "^2.8.5",
+    "express": "^4.21.1",
     "firebase": "^11.0.1",
     "firebase-tools": "^13.23.0",
     "ionicons": "^7.0.0",

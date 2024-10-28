@@ -5,41 +5,39 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input [(ngModel)]="usuario" type="email" required></ion-input> <!-- Usa [(ngModel)] para enlazar el campo de usuario -->
-        </ion-item>
-      </ion-col>
-    </ion-row>
+  <form (ngSubmit)="login()">
+    <ion-item>
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-input 
+        type="email" 
+        [(ngModel)]="credenciales.correo" 
+        name="correo" 
+        required
+        (ionFocus)="animateInput($event)">
+      </ion-input>
+    </ion-item>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input [(ngModel)]="contrasena" type="password" required></ion-input> <!-- Usa [(ngModel)] para enlazar el campo de contraseña -->
-        </ion-item>
-      </ion-col>
-    </ion-row>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input 
+        type="password" 
+        [(ngModel)]="credenciales.contrasena" 
+        name="contrasena" 
+        required
+        (ionFocus)="animateInput($event)">
+      </ion-input>
+    </ion-item>
 
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" (click)="login()">Iniciar sesión</ion-button> <!-- El botón dispara el método login() -->
-      </ion-col>
-    </ion-row>
+    <ion-button expand="block" type="submit" class="ion-margin-top">
+      Iniciar Sesión
+    </ion-button>
 
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" color="medium" (click)="recuperarContrasena()">Recuperar contraseña</ion-button> <!-- Botón para recuperar contraseña -->
-      </ion-col>
-    </ion-row>
+    <ion-button expand="block" fill="clear" routerLink="/registro">
+      Registrarse
+    </ion-button>
 
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" color="light" (click)="registro()">Registrarse</ion-button> <!-- Botón para registrarse -->
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-button expand="block" fill="clear" routerLink="/restcontrasena">
+      ¿Olvidaste tu contraseña?
+    </ion-button>
+  </form>
 </ion-content>
