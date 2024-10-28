@@ -110,7 +110,7 @@ export class LoginPage implements OnInit {
 
   recuperarContrasena() {
     // Redirige a la página de recuperación de contraseña
-    this.router.navigateByUrl("/reset-password");
+    this.router.navigateByUrl("/restcontrasena");
   }
 
   registro() {
