@@ -27,6 +27,11 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>Necesitamos acceso a tu ubicación para mostrar tu posición actual.</string>
+    	<key>NSLocationAlwaysUsageDescription</key>
+    	<string>Necesitamos acceso a tu ubicación para mostrar tu posición actual.</string>
+
 	<array>
 		<string>armv7</string>
 	</array>
