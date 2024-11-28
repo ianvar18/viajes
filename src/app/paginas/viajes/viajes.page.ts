@@ -5,6 +5,7 @@ import { HelperService } from 'src/app/services/helper.service';
 import { StorageService } from 'src/app/services/storage.service'; // Importar StorageService para obtener el token
 import { UsuarioService } from 'src/app/services/usuario.service'; // Cambiar a UsuarioService
 import { UserModel } from 'src/app/model/usuario'; // Importar el modelo UserModel
+import { Geolocation } from '@ionic-native/geolocation/ngx'; // Importar Geolocation
 
 @Component({
   selector: 'app-viajes',
@@ -17,18 +18,21 @@ export class ViajesPage implements OnInit {
   loaded: boolean = false;
   usuario: UserModel[] = [];  // Ahora usamos el modelo UserModel para el usuario
   correo: string = '';  // El correo del usuario
+  ubicacionActual: { lat: number; lng: number } | null = null; // Almacenar la ubicación actual
 
   constructor(
     private router: Router,
     private viajeService: ViajeService, // Servicio para manejar los viajes
     private usuarioService: UsuarioService, // Cambiar a UsuarioService para manejar los usuarios
     private helper: HelperService, // Servicio de utilidades (alertas, loaders, etc.)
-    private storage: StorageService // Servicio para manejar el almacenamiento local
+    private storage: StorageService, // Servicio para manejar el almacenamiento local
+    private geolocation: Geolocation // Inyectar Geolocation
   ) {}
 
   ngOnInit() {
     this.cargarUsuario(); // Cargar los datos del usuario primero
     this.cargarViajes(); // Cargar los viajes al inicializar el componente
+    this.obtenerUbicacion(); // Obtener la ubicación al inicializar el componente
   }
 
   // Método para cargar los viajes desde el servicio
@@ -48,9 +52,6 @@ export class ViajesPage implements OnInit {
         } else {
           this.helper.showAlert('No se encontraron viajes', 'Información');
         }
-      } else {
-        this.helper.showAlert('No se encontró token. Inicia sesión nuevamente.', 'Error');
-        this.router.navigateByUrl('/login'); // Redirigir al login si no hay token
       }
       
       this.loaded = true; // Marcar que los datos han sido cargados
@@ -76,9 +77,6 @@ export class ViajesPage implements OnInit {
         } else {
           this.helper.showAlert('No se encontraron datos del usuario', 'Información');
         }
-      } else {
-        this.helper.showAlert('No se encontró token o correo. Inicia sesión nuevamente.', 'Error');
-        this.router.navigateByUrl('/login');
       }
     } catch (error) {
       console.error('Error al cargar el usuario:', error);
@@ -113,5 +111,17 @@ export class ViajesPage implements OnInit {
   // Método para ir al inicio (login)
   irlogin() {
     this.router.navigateByUrl('/inicio');
+  }
+
+  // Método para obtener la ubicación actual
+  obtenerUbicacion() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.ubicacionActual = { lat: resp.coords.latitude, lng: resp.coords.longitude }; // Almacenar la ubicación
+      console.log('Ubicación actual:', this.ubicacionActual);
+      // Aquí puedes hacer algo con la ubicación, como guardarla o mostrarla
+    }).catch((error) => {
+      console.error('Error al obtener la ubicación', error);
+      this.helper.showAlert('Error al obtener la ubicación', 'Error');
+    });
   }
 }

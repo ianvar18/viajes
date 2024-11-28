@@ -6,6 +6,18 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-button (click)="obtenerUbicacion()" expand="full">Obtener Ubicación Actual</ion-button>
+
+  <ion-card *ngIf="ubicacionActual">
+    <ion-card-header>
+      <ion-card-title>Ubicación Actual</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Latitud: {{ubicacionActual.lat}}</p>
+      <p>Longitud: {{ubicacionActual.lng}}</p>
+    </ion-card-content>
+  </ion-card>
+
   <ion-list *ngIf="!loaded">
     <ion-list-header>
       <h3>

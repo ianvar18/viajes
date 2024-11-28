@@ -31,6 +31,8 @@
     "@capacitor/keyboard": "6.0.2",
     "@capacitor/preferences": "^6.0.2",
     "@capacitor/status-bar": "6.0.1",
+    "@ionic-native/core": "^5.36.0",
+    "@ionic-native/geolocation": "^5.36.0",
     "@ionic/angular": "^8.3.3",
     "angular": "^1.8.3",
     "cors": "^2.8.5",
