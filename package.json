@@ -34,7 +34,7 @@
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/geolocation": "^5.36.0",
     "@ionic/angular": "^8.3.3",
-    "angular": "^1.8.3",
+    "angular": "^1.6.10",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "firebase": "^11.0.1",
